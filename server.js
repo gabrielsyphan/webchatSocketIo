@@ -37,7 +37,7 @@ function encaminhaMsgStatus(socket, msg) {
 }
 
 function encaminhaMsgsUsuarios(socket, data) {
-    serverSocket.emit('chat msg', socket.nickname, {date: data.date, msg: data.msg})
+    serverSocket.emit('chat msg', {user: socket.nickname, date: data.date, msg: data.msg})
 }
 
 function registraLoginUsuario(socket, nickname) {
