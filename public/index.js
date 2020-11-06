@@ -26,7 +26,7 @@ function submeterForm(socket) {
 
         $('#msg').keyup(() => socket.emit('status', ''))
     } else {
-        socket.emit('chat msg', $('#msg').val())
+        socket.emit('chat msg', {date: new Date(), msg: $('#msg').val()})
     }
 
     $('#msg').val('')
