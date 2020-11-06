@@ -6,6 +6,7 @@ $(function () {
     $('form').submit(() => submeterForm(socket))
 
     socket.on('chat msg', exibirMsg)
+    socket.on('new user', exibirMsg)
 })
 
 function exibirMsg(msg) {
