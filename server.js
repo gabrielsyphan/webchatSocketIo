@@ -42,7 +42,7 @@ function encaminhaMsgsUsuarios(socket, data) {
 
 function registraLoginUsuario(socket, nickname) {
     socket.nickname = nickname
-    const msg = nickname // conectou
+    const msg = nickname + ' conectou'// conectou
     console.log(msg)
     serverSocket.emit('new user', msg)
 }
