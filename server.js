@@ -25,8 +25,8 @@ app.get('/', (requisicao, resposta) => resposta.sendFile(__dirname + '/index.htm
 serverSocket.on('connect', recebeConexaoUsuario)
 
 function recebeConexaoUsuario(socket) {
-    socket.on('login', (nickname) => registraLoginUsuario(socket, nickname, 1))
-    socket.on('disconnect', (nickname) => registraLoginUsuario(socket, nickname, 2))
+    socket.on('login', (nickname) => registraLoginUsuario(socket, {nick: nickname, aux: 1}))
+    socket.on('disconnect', (nickname) => registraLoginUsuario(socket, {nick: nickname, aux: 2}))
     socket.on('chat msg', (data) => encaminhaMsgsUsuarios(socket, data))
     socket.on('status', (msg) => encaminhaMsgStatus(socket, msg))
 }
@@ -40,9 +40,9 @@ function encaminhaMsgsUsuarios(socket, data) {
     serverSocket.emit('chat msg', {user: socket.nickname, date: data.date, msg: data.msg})
 }
 
-function registraLoginUsuario(socket, nickname, aux) {
-    socket.nickname = nickname
-    if(aux == 1) {
+function registraLoginUsuario(socket, data) {
+    socket.nickname = data.nickname
+    if(data.aux == 1) {
         const msg = nickname + ' conectou.';
     } else {
         const msg = nickname + ' desconectou.';
