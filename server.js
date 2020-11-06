@@ -41,7 +41,7 @@ function encaminhaMsgsUsuarios(socket, data) {
 }
 
 function registraLoginUsuario(socket, data) {
-    socket.nickname = data.nickname
+    socket.nickname = data.nick
     if(data.aux == 1) {
         const msg = nickname + ' conectou.';
     } else {
