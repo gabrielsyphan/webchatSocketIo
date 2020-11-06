@@ -26,8 +26,8 @@ serverSocket.on('connect', recebeConexaoUsuario)
 
 function recebeConexaoUsuario(socket) {
     socket.on('login', (nickname) => registraLoginUsuario(socket, nickname))
-    socket.on('disconnect', () => console.log('Cliente desconectado: ' + socket.nickname))
-    socket.on('chat msg', (msg) => encaminhaMsgsUsuarios(socket, msg))
+    socket.on('disconnect', (nickname) => registraLoginUsuario(socket, nickname))
+    socket.on('chat msg', (data) => encaminhaMsgsUsuarios(socket, data))
     socket.on('status', (msg) => encaminhaMsgStatus(socket, msg))
 }
 
@@ -36,13 +36,13 @@ function encaminhaMsgStatus(socket, msg) {
     socket.broadcast.emit('status', msg)
 }
 
-function encaminhaMsgsUsuarios(socket, msg) {
-    serverSocket.emit('chat msg', `${socket.nickname} diz: ${msg}`)
+function encaminhaMsgsUsuarios(socket, data) {
+    serverSocket.emit('chat msg', socket.nickname, {date: data.date, msg: data.msg})
 }
 
 function registraLoginUsuario(socket, nickname) {
     socket.nickname = nickname
-    const msg = nickname + ' conectou'
+    const msg = nickname // conectou
     console.log(msg)
     serverSocket.emit('new user', msg)
 }
