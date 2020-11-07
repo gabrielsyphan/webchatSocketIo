@@ -26,7 +26,7 @@ serverSocket.on('connect', recebeConexaoUsuario)
 
 function recebeConexaoUsuario(socket) {
     socket.on('login', (nickname) => registraLoginUsuario(socket, nickname))
-    socket.on('disconnect', () => socket.broadcast.emit('user disconnect', socket.nickname + ' desconectou'))
+    socket.on('disconnect', () => serverSocket.emit('user disconnect', socket.nickname + ' desconectou'))
     socket.on('chat msg', (data) => encaminhaMsgsUsuarios(socket, data))
     socket.on('status', (msg) => encaminhaMsgStatus(socket, msg))
 }
