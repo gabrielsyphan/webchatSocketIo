@@ -44,5 +44,5 @@ function registraLoginUsuario(socket, nickname) {
     socket.nickname = nickname
     const msg = nickname + ' conectou'// conectou
     console.log(msg)
-    serverSocket.broadcast.emit('new user', msg)
+    socket.broadcast.emit('new user', msg)
 }
