@@ -10,7 +10,7 @@ $(function () {
 })
 
 function exibirMsg(msg) {
-    $('#messages').append($('<li>').text(msg))
+    $('#messages').append($('<li>').text(msg.msg))
 }
 
 function submeterForm(socket) {
