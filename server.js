@@ -29,10 +29,14 @@ function recebeConexaoUsuario(socket) {
     socket.on('disconnect', () => serverSocket.emit('user disconnect', socket.nickname + ' desconectou'))
     socket.on('chat msg', (data) => encaminhaMsgsUsuarios(socket, data))
     socket.on('status', (msg) => encaminhaMsgStatus(socket, msg))
+    socket.on('geolocation', (data) => encaminhaMsgGeolocation(socket, data))
+}
+
+function encaminhaMsgGeolocation(socket, data) {
+    socket.broadcast.emit('status', {user: socket.nickname, date: data.latitude, msg: data.longitude})
 }
 
 function encaminhaMsgStatus(socket, msg) {
-    console.log(msg)
     socket.broadcast.emit('status', msg)
 }
 
@@ -44,6 +48,6 @@ function registraLoginUsuario(socket, nickname) {
     socket.nickname = nickname
     const msg = nickname + ' conectou'
     console.log(msg)
-    serverSocket.emit('new user', socket)
+    serverSocket.emit('new user', msg)
 //     socket.broadcast.emit('new user', msg)
 }
