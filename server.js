@@ -33,7 +33,7 @@ function recebeConexaoUsuario(socket) {
 }
 
 function encaminhaMsgGeolocation(socket, data) {
-    socket.emit('geolocation', {user: socket.nickname, latitude: data.latitude, longitude: data.longitude})
+    serverSocket.emit('geolocation', {user: socket.nickname, latitude: data.latitude, longitude: data.longitude})
 }
 
 function encaminhaMsgStatus(socket, msg) {
